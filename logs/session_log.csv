@@ -1,0 +1,212 @@
+timestamp,gesture,confidence,emotion,speech_text
+2026-02-23 02:38:27,Please,0.84,Neutral,Please
+2026-02-23 02:38:31,Hello,0.93,Neutral,Hello! Nice to see you.
+2026-02-23 02:38:34,Hello,0.93,Neutral,Hello! Nice to see you.
+2026-02-23 02:38:39,Sorry,0.85,Neutral,"It's okay, no problem."
+2026-02-23 02:38:43,Thank You,0.95,Neutral,You're welcome!
+2026-02-23 02:38:50,Thank You,0.97,Neutral,You're welcome!
+2026-02-23 02:38:52,Thank You,0.91,Neutral,You're welcome!
+2026-02-23 02:38:55,Sorry,0.88,Neutral,"It's okay, no problem."
+2026-02-23 02:38:58,Sorry,0.81,Neutral,"It's okay, no problem."
+2026-02-23 02:39:04,Thank You,0.97,Neutral,You're welcome!
+2026-02-23 02:39:07,Good Morning,0.96,Neutral,Good Morning! Have a productive day.
+2026-02-23 02:39:10,Good Night,0.93,Neutral,Good Night
+2026-02-23 02:55:55,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:55:57,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:55:59,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:00,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:01,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:03,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:04,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:06,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:07,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:09,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:10,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:12,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:13,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:15,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:17,Hello,0.97,Neutral,Hello! Nice to see you.
+2026-02-23 02:56:20,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:21,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:28,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:30,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:32,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:33,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:35,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:36,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:37,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:39,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:40,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:42,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:43,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:45,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:46,Unknown,0.0,Neutral,Unknown
+2026-02-23 02:56:48,Unknown,0.0,Neutral,Unknown
+2026-02-23 03:05:04,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-02-23 03:05:08,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-02-23 03:05:11,Thank You,0.96,Neutral,You're welcome!
+2026-02-23 03:05:15,Welcome,0.83,Neutral,Welcome
+2026-02-23 03:05:20,I Love You,0.89,Neutral,"Aww, that's sweet!"
+2026-02-23 03:05:42,Yes,0.89,Neutral,Yes
+2026-02-23 03:05:44,Yes,0.93,Neutral,Yes
+2026-02-23 03:05:46,Yes,0.87,Neutral,Yes
+2026-02-23 03:14:17,Hello,0.92,Neutral,Hello! Nice to see you.
+2026-02-23 03:33:20,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-02-23 03:33:24,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-02-23 03:33:27,Hello,0.93,Neutral,Hello! Nice to see you.
+2026-02-23 03:33:30,Good Morning,0.86,Neutral,Good Morning! Have a productive day.
+2026-02-23 03:33:33,Good Morning,0.91,Neutral,Good Morning! Have a productive day.
+2026-02-23 03:33:37,Thank You,0.96,Neutral,You're welcome!
+2026-02-23 03:33:39,Thank You,0.96,Neutral,You're welcome!
+2026-02-23 04:38:44,Hello,0.93,Neutral,Hello! Nice to see you.
+2026-02-23 04:38:48,Hello,0.93,Neutral,Hello! Nice to see you.
+2026-02-23 04:38:50,Hello,0.81,Neutral,Hello! Nice to see you.
+2026-02-23 04:38:54,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-02-23 04:38:57,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-02-23 04:39:02,Thank You,0.95,Neutral,You're welcome!
+2026-02-23 04:39:04,Thank You,0.89,Neutral,You're welcome!
+2026-02-23 04:39:06,Thank You,0.89,Neutral,You're welcome!
+2026-02-23 04:39:08,Thank You,0.92,Neutral,You're welcome!
+2026-02-23 04:39:10,Thank You,0.9,Neutral,You're welcome!
+2026-02-23 04:39:15,Good Morning,0.92,Neutral,Good Morning! Have a productive day.
+2026-02-23 04:39:21,Yes,0.82,Neutral,Yes
+2026-02-23 04:39:23,Yes,0.91,Neutral,Yes
+2026-02-23 04:39:24,Yes,0.9,Neutral,Yes
+2026-02-23 04:39:28,No,0.9,Neutral,No
+2026-02-23 04:39:30,No,0.91,Neutral,No
+2026-02-23 04:39:31,No,0.92,Neutral,No
+2026-02-23 04:39:36,Please,0.9,Neutral,Please
+2026-02-23 04:39:37,Please,0.92,Neutral,Please
+2026-02-23 04:39:41,Sorry,0.85,Neutral,"It's okay, no problem."
+2026-02-23 04:41:52,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-02-23 04:41:57,Good Morning,0.96,Neutral,Good Morning! Have a productive day.
+2026-02-23 04:42:03,Thank You,0.95,Neutral,You're welcome!
+2026-02-23 04:42:05,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:42:06,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:42:08,Thank You,0.95,Neutral,You're welcome!
+2026-02-23 04:42:10,Thank You,0.95,Neutral,You're welcome!
+2026-02-23 04:42:12,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:42:14,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:42:15,Thank You,0.93,Neutral,You're welcome!
+2026-02-23 04:42:17,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:42:21,I Love You,0.94,Neutral,"Aww, that's sweet!"
+2026-02-23 04:42:23,I Love You,0.95,Neutral,"Aww, that's sweet!"
+2026-02-23 04:42:27,Yes,0.83,Neutral,Yes
+2026-02-23 04:42:31,No,0.9,Neutral,No
+2026-02-23 04:42:32,No,0.91,Neutral,No
+2026-02-23 04:42:37,Sorry,0.85,Neutral,"It's okay, no problem."
+2026-02-23 04:42:43,Please,0.83,Neutral,Please
+2026-02-23 04:42:44,Please,0.93,Neutral,Please
+2026-02-23 04:48:05,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-02-23 04:48:09,Good Morning,0.95,Neutral,Good Morning! Have a productive day.
+2026-02-23 04:48:16,I Love You,0.88,Neutral,"Aww, that's sweet!"
+2026-02-23 04:48:19,I Love You,0.93,Neutral,"Aww, that's sweet!"
+2026-02-23 04:48:22,Thank You,0.93,Neutral,You're welcome!
+2026-02-23 04:48:24,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:48:27,Yes,0.73,Neutral,Yes
+2026-02-23 04:49:55,Hello,0.9,Neutral,Hello! Nice to see you.
+2026-02-23 04:50:00,Good Morning,0.96,Neutral,Good Morning! Have a productive day.
+2026-02-23 04:50:05,I Love You,0.84,Neutral,"Aww, that's sweet!"
+2026-02-23 04:50:08,I Love You,0.91,Neutral,"Aww, that's sweet!"
+2026-02-23 04:50:12,Please,0.84,Neutral,Please
+2026-02-23 04:50:16,Sorry,0.57,Neutral,"It's okay, no problem."
+2026-02-23 04:51:30,Hello,0.88,Neutral,Hello! Nice to see you.
+2026-02-23 04:51:35,I Love You,0.73,Neutral,"Aww, that's sweet!"
+2026-02-23 04:51:38,I Love You,0.85,Neutral,"Aww, that's sweet!"
+2026-02-23 04:51:41,Thank You,0.84,Neutral,You're welcome!
+2026-02-23 04:51:43,Thank You,0.94,Neutral,You're welcome!
+2026-02-23 04:51:51,Please,0.56,Neutral,Please
+2026-02-23 04:51:55,Sorry,0.68,Neutral,"It's okay, no problem."
+2026-02-23 04:52:28,Good Morning,0.61,Neutral,Good Morning! Have a productive day.
+2026-02-23 04:55:27,Please,0.61,Neutral,Please
+2026-02-26 12:01:58,Please,0.61,Neutral,Please
+2026-03-25 18:15:03,Please,0.85,Neutral,Please
+2026-03-25 18:15:05,Please,0.86,Neutral,Please
+2026-03-25 18:15:17,Good Night,0.69,Neutral,Good Night
+2026-03-25 18:15:26,Please,0.85,Neutral,Please
+2026-03-25 18:15:27,Please,0.86,Neutral,Please
+2026-03-25 18:15:32,Hello,0.75,Neutral,Hello! Nice to see you.
+2026-03-25 18:15:35,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-03-25 18:15:39,Yes,0.66,Neutral,Yes
+2026-03-25 18:15:42,Yes,0.72,Neutral,Yes
+2026-03-25 18:15:44,Yes,0.81,Neutral,Yes
+2026-03-25 18:15:46,Good Night,0.84,Neutral,Good Night
+2026-03-25 18:15:49,No,0.72,Neutral,No
+2026-03-25 18:15:50,No,0.79,Neutral,No
+2026-03-25 18:15:53,Thank You,0.81,Neutral,You're welcome!
+2026-03-25 18:15:55,Thank You,0.94,Neutral,You're welcome!
+2026-03-25 18:16:05,Please,0.62,Neutral,Please
+2026-03-25 18:16:07,Yes,0.74,Neutral,Yes
+2026-03-25 18:16:09,Sorry,0.69,Neutral,"It's okay, no problem."
+2026-03-25 18:16:13,Sorry,0.79,Neutral,"It's okay, no problem."
+2026-03-25 18:16:18,Sorry,0.67,Neutral,"It's okay, no problem."
+2026-03-25 18:16:22,Please,0.94,Neutral,Please
+2026-03-25 18:16:23,Please,0.94,Neutral,Please
+2026-03-25 18:16:29,Good Morning,0.74,Neutral,Good Morning! Have a productive day.
+2026-03-25 18:16:33,Good Morning,0.88,Neutral,Good Morning! Have a productive day.
+2026-03-25 18:16:37,Good Night,0.92,Neutral,Good Night
+2026-03-25 18:16:39,Good Night,0.89,Neutral,Good Night
+2026-03-25 18:16:41,Good Night,0.92,Neutral,Good Night
+2026-03-25 18:16:43,Good Night,0.9,Neutral,Good Night
+2026-03-25 18:16:46,I Love You,0.67,Neutral,"Aww, that's sweet!"
+2026-03-25 18:16:48,I Love You,0.89,Neutral,"Aww, that's sweet!"
+2026-03-25 18:16:51,I Love You,0.93,Neutral,"Aww, that's sweet!"
+2026-03-25 18:17:16,Good Night,0.66,Neutral,Good Night
+2026-03-25 18:18:20,Good Night,0.61,Neutral,Good Night
+2026-03-25 18:19:08,Good Night,0.68,Neutral,Good Night
+2026-03-25 18:19:49,Yes,0.76,Neutral,Yes
+2026-03-25 18:19:51,Yes,0.94,Happy,Yes
+2026-03-25 18:19:52,Yes,0.94,Happy,Yes
+2026-03-25 18:19:54,Yes,0.91,Happy,Yes
+2026-03-25 18:19:55,Yes,0.91,Happy,Yes
+2026-03-25 18:19:57,Yes,0.91,Happy,Yes
+2026-03-25 18:19:58,Yes,0.91,Happy,Yes
+2026-03-25 18:20:00,Yes,0.87,Happy,Yes
+2026-03-25 18:20:02,Yes,0.83,Happy,Yes
+2026-03-25 18:20:18,Yes,0.71,Neutral,Yes
+2026-03-25 18:20:25,Yes,0.7,Neutral,Yes
+2026-03-25 18:20:27,Yes,0.82,Neutral,Yes
+2026-03-25 18:20:28,Thank You,0.91,Neutral,You're welcome!
+2026-03-25 18:20:30,Thank You,0.94,Neutral,You're welcome!
+2026-03-25 18:20:35,Hello,0.69,Neutral,Hello! Nice to see you.
+2026-03-25 18:20:38,Hello,0.84,Neutral,Hello! Nice to see you.
+2026-03-25 18:20:43,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-03-25 18:20:46,Hello,0.95,Neutral,Hello! Nice to see you.
+2026-03-25 18:21:11,Sorry,0.89,Neutral,"It's okay, no problem."
+2026-03-25 18:21:15,Sorry,0.75,Neutral,"It's okay, no problem."
+2026-03-25 18:21:18,Sorry,0.94,Neutral,"It's okay, no problem."
+2026-03-25 18:21:21,Sorry,0.95,Happy,"It's okay, no problem."
+2026-03-25 18:21:24,Sorry,0.92,Happy,"It's okay, no problem."
+2026-03-25 18:21:28,Sorry,0.94,Happy,"It's okay, no problem."
+2026-03-25 23:00:31,Hello,0.97,Neutral,Hello! Nice to see you.
+2026-03-25 23:00:35,Hello,0.96,Neutral,Hello! Nice to see you.
+2026-03-25 23:00:40,Thank You,0.81,Neutral,You're welcome!
+2026-03-25 23:00:43,Yes,0.93,Neutral,Yes
+2026-03-25 23:00:45,No,0.87,Neutral,No
+2026-03-25 23:00:53,Yes,0.7,Neutral,Yes
+2026-03-25 23:00:55,Sorry,0.91,Neutral,"It's okay, no problem."
+2026-03-25 23:00:58,Please,0.89,Neutral,Please
+2026-03-25 23:01:00,Please,0.92,Neutral,Please
+2026-03-25 23:01:04,I Love You,0.85,Neutral,"Aww, that's sweet!"
+2026-03-25 23:01:06,I Love You,0.85,Neutral,"Aww, that's sweet!"
+2026-03-25 23:01:10,Good Night,0.92,Neutral,Good Night
+2026-03-25 23:01:12,Good Morning,0.95,Neutral,Good Morning! Have a productive day.
+2026-03-25 23:01:39,Hello,0.71,Neutral,Hello! Nice to see you.
+2026-03-25 23:01:45,Welcome,0.83,Neutral,Welcome
+2026-03-25 23:01:47,Welcome,0.9,Neutral,Welcome
+2026-03-25 23:03:46,Hello,0.97,Neutral,Hello! Nice to see you.
+2026-03-25 23:03:49,Hello,0.9,Neutral,Hello! Nice to see you.
+2026-03-25 23:03:55,Please,0.63,Neutral,Please
+2026-03-25 23:04:02,Yes,0.64,Neutral,Yes
+2026-03-25 23:04:05,Yes,0.6,Neutral,Yes
+2026-03-25 23:04:12,No,0.6,Neutral,No
+2026-03-25 23:04:14,Good Night,0.84,Neutral,Good Night
+2026-03-25 23:04:16,I Love You,0.71,Neutral,"Aww, that's sweet!"
+2026-03-25 23:04:19,I Love You,0.72,Neutral,"Aww, that's sweet!"
+2026-03-25 23:04:21,I Love You,0.91,Neutral,"Aww, that's sweet!"
+2026-03-25 23:04:24,I Love You,0.86,Neutral,"Aww, that's sweet!"
+2026-03-25 23:04:29,Please,0.7,Neutral,Please
+2026-03-25 23:04:31,Please,0.83,Neutral,Please
+2026-03-25 23:04:37,Please,0.61,Neutral,Please
+2026-03-25 23:04:39,Welcome,0.67,Neutral,Welcome
+2026-03-25 23:04:41,Welcome,0.73,Neutral,Welcome

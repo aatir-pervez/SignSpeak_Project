@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SignSpeak | Live Gesture Recognition</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #00ff88;
+    }
+
+    #video-container {
+      margin-top: 20px;
+    }
+
+    #frame {
+      width: 640px;
+      height: 480px;
+      border: 3px solid #333;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+
+    #prediction {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .status-box {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .badge-fps {
+      background-color: #0070f3;
+      color: white;
+    }
+
+    .badge-conf {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    .toggle-btn {
+      margin-top: 25px;
+      background-color: #00ff88;
+      color: #111;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .toggle-btn.off {
+      background-color: #ff4757;
+      color: white;
+    }
+
+    .toggle-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .link-box {
+      margin-top: 25px;
+    }
+
+    .report-link {
+      text-decoration: none;
+      color: #00ff88;
+      font-weight: bold;
+      border: 2px solid #00ff88;
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .report-link:hover {
+      background-color: #00ff88;
+      color: #111;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .lang-btn {
+      background-color: #ffaa00;
+      color: #111;
+      margin-left: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📷 SignSpeak – Live Gesture Recognition</h1>
+
+  <div id="video-container">
+    <img id="frame" src="/frame.jpg" alt="Live camera feed">
+  </div>
+
+  <div id="prediction">
+    Prediction: <span id="label">Loading...</span>
+  </div>
+
+  <div class="status-box">
+    <div class="badge badge-fps">FPS: <span id="fps">0</span></div>
+    <div class="badge badge-conf">Confidence: <span id="conf">0</span>%</div>
+  </div>
+  <div id="latencyBox" class="badge">Latency: 0 ms</div>
+
+  <!-- Toggle Buttons -->
+  <div style="margin-top: 25px;">
+    <button id="speakBtn" class="toggle-btn" onclick="toggleSpeak()">🔊 Auto-Speak: ON</button>
+    <button id="langBtn" class="toggle-btn lang-btn" onclick="toggleLang()">🌐 Language: English</button>
+  </div>
+  <a href="/settings" 
+   style="display:inline-block; margin-top:20px; padding:10px 20px; 
+          background:#444; color:white; text-decoration:none; border-radius:8px;">
+   ⚙ Settings
+</a>
+  <select id="emotionSelect" onchange="setEmotion(this.value)" style="margin-left:10px;">
+  <option value="Neutral">😐 Neutral</option>
+  <option value="Happy">😄 Happy</option>
+  <option value="Sad">😢 Sad</option>
+</select>
+
+  <div class="link-box">
+    <a href="/report" class="report-link">📊 View Model Report / Confusion Matrix</a>
+    <br><br>
+<a href="/benchmark" class="report-link">📈 View Performance Benchmark</a>
+  </div>
+
+  <footer>
+    Made with ❤️ by Aatir & Team | SignSpeak Project (Sprint 2)
+  </footer>
+
+  <script>
+    // 🔁 Refresh live frame every 100ms
+    function refreshFrame() {
+      const frame = document.getElementById("frame");
+      frame.src = "/frame.jpg?t=" + new Date().getTime();
+    }
+    setInterval(refreshFrame, 100);
+
+    // 🔁 Refresh prediction every second
+    async function refreshPrediction() {
+      try {
+        const res = await fetch("/prediction");
+        const data = await res.json();
+        document.getElementById("label").textContent = data.label || "-";
+        document.getElementById("conf").textContent = (data.conf * 100).toFixed(1);
+        document.getElementById("latencyBox").textContent =
+    "Latency: " + data.latency + " ms";
+        if (data.fps) document.getElementById("fps").textContent = data.fps;
+      } catch (err) {
+        console.error("Prediction fetch error:", err);
+      }
+    }
+    setInterval(refreshPrediction, 1000);
+
+    // 🎙️ Toggle Auto-Speak
+    async function toggleSpeak() {
+      try {
+        const res = await fetch("/toggle_speak", { method: "POST" });
+        const data = await res.json();
+        const btn = document.getElementById("speakBtn");
+        if (data.auto_speak) {
+          btn.textContent = "🔊 Auto-Speak: ON";
+          btn.classList.remove("off");
+        } else {
+          btn.textContent = "🔇 Auto-Speak: OFF";
+          btn.classList.add("off");
+        }
+      } catch (err) {
+        console.error("Toggle Speak Error:", err);
+      }
+    }
+
+    // 🌐 Toggle Language (English <-> Hindi)
+    async function toggleLang() {
+      try {
+        const res = await fetch("/toggle_lang", { method: "POST" });
+        const data = await res.json();
+        const btn = document.getElementById("langBtn");
+        const newLang = data.lang === "en" ? "English" : "Hindi";
+        btn.textContent = `🌐 Language: ${newLang}`;
+        btn.style.backgroundColor = data.lang === "en" ? "#ffaa00" : "#00b894";
+      } catch (err) {
+        console.error("Language Toggle Error:", err);
+      }
+    }
+    // 🎭 Set Emotion
+async function setEmotion(emotion) {
+  try {
+    await fetch(`/set_emotion/${emotion}`, { method: "POST" });
+  } catch (err) {
+    console.error("Emotion Set Error:", err);
+  }
+}
+  </script>
+</body>
+</html>

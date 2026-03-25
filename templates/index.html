@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignSpeak Sprint-1 Demo</title>
+    <style>
+        body { font-family: system-ui, Arial; max-width: 700px; margin: 24px auto; text-align: center; }
+        select, button { padding: 8px 12px; margin: 8px; font-size: 16px; }
+        h1 { color: #0a7; }
+        audio { margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <h1>SignSpeak Sprint-1 Demo</h1>
+    <form method="POST" action="/">
+        <select name="input_text" required>
+            <option value="">-- Select a phrase --</option>
+            <option value="Hello">Hello</option>
+            <option value="How are you?">How are you?</option>
+            <option value="Thank you">Thank you</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if output_text %}
+        <h2>Output: {{ output_text }}</h2>
+        {% if audio_file %}
+            <audio controls autoplay>
+                <source src="{{ url_for('serve_static', filename=audio_file) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

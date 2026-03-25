@@ -1,0 +1,8 @@
+flask
+opencv-python
+mediapipe
+tensorflow
+numpy
+pyttsx3
+speechrecognition
+
