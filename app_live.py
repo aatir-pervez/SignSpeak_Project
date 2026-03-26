@@ -16,10 +16,14 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
+emotion_last = "Neutral"
+emotion_count = 0
+
 mp_face = mp.solutions.face_mesh
 face_mesh = mp_face.FaceMesh(
     static_image_mode=False,
     max_num_faces=1,
+    refine_landmarks=True, 
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5
 )
@@ -27,7 +31,7 @@ face_mesh = mp_face.FaceMesh(
 
 # ---------------- CONFIG ----------------
 
-conf_threshold = 0.60
+conf_threshold = 0.35
 STABLE_FRAMES_REQUIRED = 3
 
 
@@ -108,22 +112,70 @@ def extract_features(landmarks):
 # ---------------- TEXT TO SPEECH ----------------
 
 smart_replies = {
-    "Hello": "Hello! Nice to see you.",
-    "Thank You": "You're welcome!",
-    "Good Morning": "Good Morning! Have a productive day.",
-    "Sorry": "It's okay, no problem.",
-    "I Love You": "Aww, that's sweet!"
+    "Hello": {
+        "Happy": "Hello 😊 Nice to see you!",
+        "Sad": "Hello... are you feeling okay?",
+        "Neutral": "Hello."
+    },
+    "Thank You": {
+        "Happy": "Thank you so much 😊",
+        "Sad": "Thanks... I appreciate it.",
+        "Neutral": "Thank you."
+    },
+    "Sorry": {
+        "Happy": "Sorry 😊 it's okay!",
+        "Sad": "I'm really sorry...",
+        "Neutral": "Sorry."
+    },
+    "Good Morning": {
+        "Happy": "Good morning 😊 have a great day!",
+        "Sad": "Good morning... take care.",
+        "Neutral": "Good morning."
+    },
+    "I Love You": {
+        "Happy": "I love you ❤️",
+        "Sad": "I love you... stay strong.",
+        "Neutral": "I love you."
+    },
+    "Help": {
+          "Happy": "I'm here to help 😊",
+          "Sad": "Let me help you...",
+          "Neutral": "I can help."
+    },
+    "Stop": {
+           "Happy": "Stop 😊 that's enough!",
+           "Sad": "Please stop...",
+           "Neutral": "Stop."
+    },
+    "Good": {
+           "Happy": "That's good 😊",
+           "Sad": "It's okay...",
+           "Neutral": "Good."
+    },
+    "Bad": {
+         "Happy": "Oops 😅 that's not good",
+         "Sad": "That's bad...",
+         "Neutral": "Bad."
+    },
+    "Fine": {
+         "Happy": "I'm doing great 😊",
+         "Sad": "I'm fine...",
+         "Neutral": "I'm fine."
+    }
 }
-
 
 def speak_label(label):
     global last_spoken, last_time
 
+    #  Skip invalid cases
     if not auto_speak or label in ["-", "Unknown"]:
         return
 
-    # 🔹 Smart reply
-    speech_text = smart_replies.get(label, label)
+    # 🔹 Get emotion-aware speech
+    if label in smart_replies:
+        speech_text = smart_replies[label].get(current_emotion, label)
+    else:
+        speech_text = label
 
     # 📝 Log session
     with open(LOG_FILE, "a", newline="") as f:
@@ -137,7 +189,12 @@ def speak_label(label):
         ])
 
     try:
-        # 🔹 English speech with emotion
+        # 🔍 Debug (VERY IMPORTANT)
+        # print("LABEL:", label)
+        # print("EMOTION:", current_emotion)
+        # print("SPEAKING:", speech_text)
+
+        # 🔹 English speech (only speed changes, text already decided)
         if current_lang == "en":
 
             if current_emotion == "Sad":
@@ -161,7 +218,12 @@ def speak_label(label):
                 "Sorry": "मुझे माफ़ करें",
                 "Welcome": "स्वागत है",
                 "Good Night": "शुभ रात्रि",
-                "I Love You": "मैं तुमसे प्यार करता हूँ"
+                "I Love You": "मैं तुमसे प्यार करता हूँ",
+                "Help": "मदद करो",
+                "Stop": "रुको",
+                "Good": "अच्छा",
+                "Bad": "बुरा",
+                "Fine": "ठीक हूँ",
             }
 
             hindi_text = hindi_map.get(label, label)
@@ -184,6 +246,7 @@ def speak_label(label):
 def camera_loop():
     global latest_frame, latest_pred, running
     global last_label, stable_count, current_emotion, frame_count
+    global total_predictions, unknown_predictions, latency_history
 
     cap = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)
 
@@ -192,8 +255,6 @@ def camera_loop():
         return
 
     print("Camera started")
-
-    
 
     while running:
 
@@ -206,28 +267,55 @@ def camera_loop():
 
         frame = cv2.flip(frame, 1)
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        
+
+        # ---------------- HAND DETECTION ----------------
         res = hands.process(rgb)
+
+        # ---------------- FACE DETECTION (OPTIMIZED) ----------------
+        face_res = face_mesh.process(rgb)
         
-        if frame_count % 5 == 0:
-            face_res = face_mesh.process(rgb)
-        else:
-            face_res = None
+                # ---------------- SIMPLE & WORKING EMOTION ----------------
+
+        detected_emotion = "Neutral"
 
         if face_res and face_res.multi_face_landmarks:
-           face = face_res.multi_face_landmarks[0]
+           
+            face = face_res.multi_face_landmarks[0]
 
-    # Example simple rule (student level)
-           mouth_open = face.landmark[13].y - face.landmark[14].y
+            # 🔹 Simple Mouth-based detection
+            upper_lip = face.landmark[13].y
+            lower_lip = face.landmark[14].y
+            mouth_gap = lower_lip - upper_lip
 
-           if mouth_open < -0.02:
-               current_emotion = "Happy"
-           elif mouth_open > 0.02:
-             current_emotion = "Sad"
-           else:
-               current_emotion = "Neutral"
+            # 🔥 Simple logic (works reliably)
+            if mouth_gap > 0.02:
+                detected_emotion = "Happy"
 
+            elif mouth_gap < 0.015:
+                detected_emotion = "Sad"
 
+            else:
+                detected_emotion = "Neutral"
+
+       
+
+        # ---------------- STABILITY FILTER ----------------
+        global emotion_last, emotion_count
+
+        if detected_emotion == emotion_last:
+            emotion_count += 1
+        else:
+            emotion_count = 1
+            emotion_last = detected_emotion
+
+        # Accept only stable emotion
+        if emotion_count >= 2:
+            current_emotion = detected_emotion
+
+        if frame_count % 30 == 0:
+           print("Detected:", detected_emotion, "| Final:", current_emotion)
+
+        # ---------------- GESTURE PREDICTION ----------------
         pred_label = "-"
         pred_conf = 0.0
 
@@ -256,31 +344,27 @@ def camera_loop():
                 pred_conf = 0.0
 
         else:
-            # 🔥 No hand detected
             pred_label = "Unknown"
             pred_conf = 0.0
 
-        
-
+        # ---------------- CONFIDENCE FILTER ----------------
         if pred_conf < conf_threshold:
             pred_label = "Unknown"
 
-        # Stability check
-        # 🔁 Simple Stability (2 consistent frames)
-
+        # ---------------- STABILITY CHECK ----------------
         if pred_label == last_label:
-              stable_count += 1
+            stable_count += 1
         else:
-              stable_count = 1
-              last_label = pred_label
+            stable_count = 1
+            last_label = pred_label
 
-# Accept only if stable
-        if stable_count < 2:
-              pred_label = "Unknown"
+        if stable_count < 1:
+            pred_label = "Unknown"
 
+        # ---------------- SPEAK ----------------
         speak_label(pred_label)
 
-        # Draw text
+        # ---------------- DRAW TEXT ----------------
         cv2.putText(
             frame,
             f"{pred_label} ({pred_conf:.2f})",
@@ -291,50 +375,47 @@ def camera_loop():
             2
         )
 
+        # 🎨 Emotion Color Logic
+        color = (255, 255, 255)  # default (white)
+
+        if current_emotion == "Happy":
+            color = (0, 255, 0)   # Green
+        elif current_emotion == "Sad":
+            color = (0, 0, 255)   # Red
+
+        # 🔥 BIG EMOTION DISPLAY
         cv2.putText(
-             frame,
-             f"Emotion: {current_emotion}",
-             (10, 60),
-             cv2.FONT_HERSHEY_SIMPLEX,
-             0.7,
-             (255, 255, 0),
-             2
+            frame,
+            f"Emotion: {current_emotion}",
+            (10, 90),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1.2,
+            color,
+            3
         )
 
-        # Update shared frame
+        # ---------------- LATENCY ----------------
         latency_ms = round((time.time() - start_time) * 1000, 2)
 
-        global total_predictions, unknown_predictions, latency_history
-
-        
-        # Only count when a hand is actually detected
         if res.multi_hand_landmarks:
-
             total_predictions += 1
 
             if pred_label == "Unknown":
-                  unknown_predictions += 1  
-        
-        
+                unknown_predictions += 1
+
         latency_history.append(latency_ms)
         if len(latency_history) > 100:
             latency_history.pop(0)
 
-
-
-
-
+        # ---------------- UPDATE FRAME ----------------
         with lock:
             latest_frame = frame.copy()
-            
+
             latest_pred = {
-                 "label": pred_label,
-                 "conf": round(pred_conf, 2),
-                 "latency": latency_ms
+                "label": pred_label,
+                "conf": round(pred_conf, 2),
+                "latency": latency_ms
             }
-
-
-            
 
         time.sleep(0.01)
 
@@ -359,10 +440,31 @@ def frame_jpg():
     ok, buf = cv2.imencode(".jpg", frame)
     return (buf.tobytes(), 200, {"Content-Type": "image/jpeg"})
 
+
+
+
 @app.route("/prediction")
 def prediction():
     with lock:
-        return jsonify(latest_pred)
+        return jsonify({
+            "label": latest_pred.get("label"),
+            "conf": latest_pred.get("conf"),
+            "latency": latest_pred.get("latency"),
+            "fps": latest_pred.get("fps", 0),
+            "emotion": current_emotion   # 🔥 THIS FIXES YOUR ISSUE
+        })
+
+
+
+
+@app.route("/report")
+def report():
+    return render_template(
+        "report.html",
+        conf_img="/static/reports/confusion_matrix.png",
+        accuracy_text=open("static/reports/accuracy_report.txt").read()
+    )
+
 
 @app.route("/toggle_speak", methods=["POST"])
 def toggle_speak():

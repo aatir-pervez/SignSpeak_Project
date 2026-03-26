@@ -9,8 +9,8 @@ import mediapipe as mp
 SAVE_PATH = "data/landmarks.csv"
 LABELS = [
     "Hello", "Thank You", "Yes", "No", "Good Morning",
-    "I Love You", "Sorry", "Good Night", "Please", "Welcome"
-]  # 10 static signs
+    "I Love You", "Sorry", "Good Night", "Please", "Welcome", "Help", "Stop", "Good", "Bad", "Fine"
+]  # 15 static signs
 
 os.makedirs("data", exist_ok=True)
 
@@ -69,7 +69,7 @@ current_label_idx = 0
 count_for_label = 0
 
 print("\nControls:")
-print("  [1..10] -> choose label:", dict(zip(range(1, 11), LABELS)))
+print("  [1-9,0,-,=,u,i,o] -> choose label:", dict(zip(range(1, len(LABELS)+1), LABELS)))
 print("  [C]     -> capture one sample")
 print("  [A]     -> auto-capture 25 samples (2/sec)")
 print("  [Q]     -> quit\n")
@@ -115,12 +115,42 @@ while True:
     cv2.imshow("Capture Landmarks - SignSpeak", frame)
     key = cv2.waitKey(1) & 0xFF
 
-    # choose label
-    if key in [ord(str(i)) for i in range(1, 10)] + [ord('0')]:
-        current_label_idx = (int(chr(key)) - 1) % 10
+    
+        # choose label
+    if key in [ord(str(i)) for i in range(1, 10)]:
+        current_label_idx = int(chr(key)) - 1
         count_for_label = 0
         auto = False
 
+    elif key == ord('0'):  # 10th → Welcome
+        current_label_idx = 9
+        count_for_label = 0
+        auto = False
+
+    elif key == ord('-'):  # 11th → Help
+        current_label_idx = 10
+        count_for_label = 0
+        auto = False
+
+    elif key == ord('='):  # 12th → Stop
+        current_label_idx = 11
+        count_for_label = 0
+        auto = False
+
+    elif key == ord('u'):  # 13th → Good
+        current_label_idx = 12
+        count_for_label = 0
+        auto = False
+
+    elif key == ord('i'):  # 14th → Bad
+        current_label_idx = 13
+        count_for_label = 0
+        auto = False
+
+    elif key == ord('o'):  # 15th → Fine
+        current_label_idx = 14
+        count_for_label = 0
+        auto = False
     # capture manually
     elif key in [ord('c'), ord('C')]:
         if res.multi_hand_landmarks:

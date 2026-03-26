@@ -1,16 +1,21 @@
               precision    recall  f1-score   support
 
-Good Morning       1.00      1.00      1.00       250
+         Bad       1.00      1.00      1.00       150
+        Fine       1.00      1.00      1.00       150
+        Good       1.00      1.00      1.00       150
+Good Morning       1.00      1.00      1.00       150
   Good Night       1.00      1.00      1.00       100
-       Hello       1.00      1.00      1.00       275
+       Hello       1.00      1.00      1.00       200
+        Help       1.00      1.00      1.00       150
   I Love You       1.00      1.00      1.00       100
-          No       1.00      1.00      1.00       250
+          No       1.00      1.00      1.00       150
       Please       1.00      1.00      1.00       102
-       Sorry       1.00      1.00      1.00       101
-   Thank You       1.00      1.00      1.00       250
+       Sorry       1.00      1.00      1.00       150
+        Stop       1.00      1.00      1.00       150
+   Thank You       1.00      1.00      1.00       200
      Welcome       1.00      1.00      1.00       104
-         Yes       1.00      1.00      1.00       225
+         Yes       1.00      1.00      1.00       150
 
-    accuracy                           1.00      1757
-   macro avg       1.00      1.00      1.00      1757
-weighted avg       1.00      1.00      1.00      1757
+    accuracy                           1.00      2156
+   macro avg       1.00      1.00      1.00      2156
+weighted avg       1.00      1.00      1.00      2156
